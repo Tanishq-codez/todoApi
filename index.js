@@ -18,9 +18,12 @@ connectDb();
 // express.json => already existing middleware that parse json files into req.body 
 app.use(express.json());
 
+
 app.get("/" , (req,res)=>{
     res.send("todo api running");
 });
+
+app.use("/auth", require("./routes/authRoutes"));
 
 // routes 
 app.use("/todos", require("./routes/todoRoutes"));
