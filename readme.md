@@ -5,7 +5,8 @@ todo api
 CRUD operations
 mongoDb integration 
 error handling  
-.... adding more 
+jwt authentication 
+password hashing using bycrypt 
 
 ##setup : 
 npm install   
