@@ -4,7 +4,7 @@ const Todo = require("../models/todoModels"); // model name is capital (conventi
 // GET all todos
 exports.getTodos = async (req, res, next) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find({user : req.user._id});
     res.status(200).json({
       success: true,
       count: todos.length,
@@ -20,7 +20,8 @@ exports.getTodos = async (req, res, next) => {
 exports.createTodo = async (req, res, next) => {
   try {
     const todo = await Todo.create({
-      title: req.body.title
+      title: req.body.title,
+      user : req.user._id
     });
 
     res.status(201).json({
@@ -39,7 +40,7 @@ exports.updateTodo = async (req, res, next) => {
     const { id } = req.params;
 
     const updated = await Todo.findByIdAndUpdate(
-      id,
+      {_id : id , user : req.user._id},
       req.body,
       { new: true, runValidators: true }
     );
@@ -67,7 +68,10 @@ exports.deleteTodo = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const deleted = await Todo.findByIdAndDelete(id);
+    const deleted = await Todo.findByIdAndDelete({
+      _id:id ,
+      user : req.user._id
+    } );
 
     if (!deleted) {
       return res.status(404).json({
