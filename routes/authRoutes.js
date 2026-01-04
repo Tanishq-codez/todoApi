@@ -4,7 +4,13 @@ const router = express.Router();
 
 const { register , login } = require("../controllers/authController");
 
-router.post("/register", register);
-router.post("/login",login) ; 
+const {
+  validateRegister,
+  validateLogin
+} = require("../middlewares/validateAuth");
+
+
+router.post("/register", validateRegister , register);
+router.post("/login" , validateLogin , login) ; 
 
 module.exports = router;

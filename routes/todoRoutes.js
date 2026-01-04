@@ -13,7 +13,7 @@ const {
 
 router.get("/", auth ,getTodos);
 router.post("/",auth , validateTodo, createTodo);
-router.put("/:id", auth , updateTodo);
-router.delete("/:id", auth, validateTodo, deleteTodo);
+router.put("/:id", auth ,validateTodo , updateTodo);
+router.delete("/:id", auth, deleteTodo);
 
 module.exports = router;
